@@ -6,9 +6,10 @@
   <script>
     const params = new URLSearchParams(window.location.search);
     const hwid = params.get("hwid");
+
     if (hwid) {
-      sessionStorage.setItem("hwid", hwid);
-      window.location.href = "/key.html";
+      // Send HWID directly in the URL
+      window.location.href = "/key.html?hwid=" + encodeURIComponent(hwid);
     } else {
       document.body.innerText = "Missing HWID. Please go back and use the Get Key button.";
     }
