@@ -2,84 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Get Your Key</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your HWID Key</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #a1c4fd, #c2e9fb); /* calming blue */
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #dbe9f4, #f5e6f7);
+      color: #333;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      overflow: hidden;
     }
-
-    .banner {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background-image: url('https://i.postimg.cc/dt11TwpS/71rx-Uk-Ic-ADL-UF1000-1000-QL80.jpg'); /* Replace with your own banner */
-      background-size: cover;
-      background-position: center;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-    }
-
-    .button {
-      padding: 14px 28px;
-      background-color: #005eff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: all 0.2s ease;
-      width: 200px;
+    .card {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
-
-    .button:hover {
-      background-color: #003fc1;
-      transform: scale(1.05);
+    h1 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #444;
     }
-
-    .info {
-      margin-top: 40px;
-      color: #333;
-      font-size: 14px;
-      opacity: 0.7;
+    p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    .key {
+      font-size: 20px;
+      font-weight: bold;
+      background: #f0f0f0;
+      border: 2px dashed #ccc;
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      word-break: break-word;
+      color: #2a2a2a;
     }
   </style>
 </head>
 <body>
-
-  <div class="banner"></div>
-
-  <div class="button-container">
-    <a href="https://linkvertise.com/your-link-here" class="button" target="_blank">
-      Linkvertise (7 Hours)
-    </a>
-    <a href="https://work.ink/your-link-here" class="button" target="_blank">
-      Work.ink (24 Hours)
-    </a>
+  <div class="card">
+    <h1>Your Key is Ready</h1>
+    <p>This key is valid for 24 hours and locked to your HWID.</p>
+    <div class="key" id="keyBox">Loading...</div>
+    <p style="font-size: 13px; margin-top: 8px; color: #777;">
+      Paste this key into the script's key input field.
+    </p>
   </div>
 
-  <div class="info">
-    Choose your prefered key.
-  </div>
+  <script>
+    const hwid = sessionStorage.getItem("hwid");
 
+    if (!hwid) {
+      document.getElementById("keyBox").innerText = "HWID missing. Please go back and use the Get Key button.";
+    } else {
+      fetch("/get-key?hwid=" + encodeURIComponent(hwid))
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === "success") {
+            document.getElementById("keyBox").innerText = data.key;
+          } else {
+            document.getElementById("keyBox").innerText = "Failed to retrieve key.";
+          }
+        })
+        .catch(() => {
+          document.getElementById("keyBox").innerText = "Error connecting to server.";
+        });
+    }
+  </script>
 </body>
 </html>
