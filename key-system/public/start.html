@@ -69,31 +69,23 @@
   <div class="banner"></div>
 
   <div class="button-container">
-    <a id="linkvertiseBtn" class="button" target="_blank">Linkvertise (7 Hours)</a>
     <a id="workInkBtn" class="button" target="_blank">Work.ink (24 Hours)</a>
   </div>
 
-  <div class="info">
-    Choose your preferred key.
-  </div>
+  <div class="info">Choose your preferred key method.</div>
 
-  <!-- ✅ Script to handle HWID + dynamic links -->
   <script>
     const params = new URLSearchParams(window.location.search);
-    let hwid = params.get("hwid");
+    const hwid = params.get("hwid");
 
     if (hwid) {
       sessionStorage.setItem("hwid", hwid);
+      document.getElementById("workInkBtn").href =
+        "https://work.ink/219J/lf5ribxz?target=" +
+        encodeURIComponent("https://key-8pfc.onrender.com/redirect.html?hwid=" + hwid);
     } else {
-      hwid = sessionStorage.getItem("hwid") || "unknown_" + Math.floor(Math.random() * 999999);
-      sessionStorage.setItem("hwid", hwid);
+      document.body.innerHTML = "<h2>Missing HWID. Please open this from the Get Key button.</h2>";
     }
-
-    // Replace with your actual Render domain
-    const redirectBase = "https://key-8pfc.onrender.com/redirect.html?hwid=" + encodeURIComponent(hwid);
-
-    document.getElementById("linkvertiseBtn").href = "https://linkvertise.com/your-link-here?target=" + redirectBase;
-    document.getElementById("workInkBtn").href = "https://work.ink/219J/lf5ribxz?target=" + redirectBase;
   </script>
 </body>
 </html>
