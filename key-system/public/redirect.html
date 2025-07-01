@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="refresh" content="0; URL=key.html" />
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const hwid = params.get("hwid");
+    if (hwid) {
+      sessionStorage.setItem("hwid", hwid);
+    }
+    location.href = "key.html";
+  </script>
+</head>
+<body>
+  Redirecting...
+</body>
+</html>
