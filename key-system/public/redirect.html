@@ -1,17 +1,24 @@
+<!-- public/redirect.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="refresh" content="0; URL=key.html" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting to your key...</p>
+
   <script>
     const params = new URLSearchParams(window.location.search);
     const hwid = params.get("hwid");
+
     if (hwid) {
       sessionStorage.setItem("hwid", hwid);
+      window.location.href = "/key.html";
+    } else {
+      document.body.innerHTML = "<h2>Missing HWID. Please go back and use the Get Key button.</h2>";
     }
-    location.href = "key.html";
   </script>
-</head>
-<body>
-  Redirecting...
 </body>
 </html>
