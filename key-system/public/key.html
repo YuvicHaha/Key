@@ -56,7 +56,8 @@
   </div>
 
   <script>
-    const hwid = sessionStorage.getItem("hwid");
+    const params = new URLSearchParams(window.location.search);
+    const hwid = params.get("hwid");
 
     if (!hwid) {
       document.getElementById("keyBox").innerText = "HWID missing. Please go back and use the Get Key button.";
