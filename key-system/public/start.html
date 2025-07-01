@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #a1c4fd, #c2e9fb); /* calming blue */
+      background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -22,7 +22,7 @@
       width: 180px;
       height: 180px;
       border-radius: 50%;
-      background-image: url('https://i.postimg.cc/dt11TwpS/71rx-Uk-Ic-ADL-UF1000-1000-QL80.jpg'); /* Replace with your own banner */
+      background-image: url('https://i.postimg.cc/dt11TwpS/71rx-Uk-Ic-ADL-UF1000-1000-QL80.jpg');
       background-size: cover;
       background-position: center;
       margin-bottom: 30px;
@@ -78,8 +78,16 @@
   </div>
 
   <div class="info">
-    Choose your prefered key.
+    Choose your preferred key.
   </div>
 
+  <!-- ✅ Add this script before </body> -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const hwid = params.get("hwid");
+    if (hwid) {
+      sessionStorage.setItem("hwid", hwid);
+    }
+  </script>
 </body>
 </html>
