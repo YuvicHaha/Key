@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Redirecting...</title>
   <script>
     const params = new URLSearchParams(window.location.search);
     const hwid = params.get("hwid");
-
     if (hwid) {
       sessionStorage.setItem("hwid", hwid);
       window.location.href = "/key.html";
@@ -16,6 +15,6 @@
   </script>
 </head>
 <body>
-  Redirecting to your key...
+  <p>Redirecting to your key...</p>
 </body>
 </html>
